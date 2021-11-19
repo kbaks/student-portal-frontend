@@ -3,6 +3,7 @@
   "productName": "Student Portal",
   "version": "1.0.0",
   "description": "Demo electron application",
+  "repository": "https://github.com/kbaks/student-portal-frontend",
   "main": "main.js",
   "devDependencies": {
     "electron": "^7.2.4",
@@ -10,15 +11,36 @@
   },
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "electron-builder build --win --publish never",
+    "deploy": "electron-builder build --win --publish always"
   },
   "dependencies": {
+    "@electron-forge/publisher-github": "^6.0.0-beta.61",
     "bootstrap": "^4.4.1",
     "electron": "^7.2.4",
+    "electron-updater": "^4.3.9",
     "jquery": "^3.5.0",
     "kill-port": "^1.6.0",
-    "tree-kill": "^1.2.2"
+    "tree-kill": "^1.2.2",
+    "update-electron-app": "^2.0.1"
   },
   "author": "Amit Bhave",
-  "license": "ISC"
+  "license": "ISC",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "kbaks",
+              "name": "student-portal-frontend"
+            }
+          }
+        }
+      ]
+    }
+  }
 }

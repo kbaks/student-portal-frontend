@@ -2,6 +2,8 @@
 
 const electron = require('electron')
 const app = electron.app
+const autoUpdater = electron.autoUpdater
+const updateApp = require('update-electron-app');
 const globalShortcut = electron.globalShortcut
 const os = require('os')
 const path = require('path')
@@ -21,6 +23,11 @@ app.on('ready', function () {
       defaultEncoding: 'UTF-8'
     }
   })
+
+  updateApp({
+    updateInterval: '5 minutes',
+    notifyUser: true
+  });
 
   var jarPath = app.getAppPath() + '\\student-portal-api.jar';
   var child = require('child_process').spawn(
@@ -61,3 +68,6 @@ app.on('ready', function () {
 })
 
 app.on('window-all-closed', () => { app.quit() })
+
+autoUpdater.setFeedURL('https://dist.unlock.sh/v1/electron/my-app')
+autoUpdater.checkForUpdates()
